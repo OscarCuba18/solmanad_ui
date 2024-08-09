@@ -18,7 +18,7 @@
         <label>Fecha requerida:</label>
         <input type="date" v-model="request.date_required" required />
       </div>
-      <button @click="cancel" type="submit">Cancelar</button>
+      <button @click="cancel" type="submit" class="btnCancel">Cancelar</button>
       <button type="submit" class="btnSave">Guardar</button>
       <button v-if="isEditMode" type="button" @click="deleteRequest" class="btnDelete">Eliminar</button>
     </form>
@@ -87,17 +87,61 @@ div {
   margin: 20px;
 }
 form {
-  background-color: antiquewhite;
+  border-color: #d0d7deb3;
+  border-width: 1px;
+  border-style: solid;
   padding: 1rem;
   border-radius: 1rem;
 }
 button {
   border: none;
-  color: black;
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 0.5rem;
   margin-inline: 1rem;
-  background-color: gray;
+}
+input {
+  width: 15rem;
+  border-radius: 0.5rem;
+  border-color: #d0d7deb3;
+  padding: 5px;
+}
+label {
+  width: 10rem;
+  text-align: right;
+  margin-right: 1rem;
+}
+.btnCancel {
+  color: #2c3e50;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #2c3e50;
+  background-color: transparent;
+}
+.btnCancel:hover{
+  color: white;
+  background-color: #2c3e50;
+}
+.btnSave {
+  color: #42b983;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #42b983;
+  background-color: transparent;
+}
+.btnSave:hover{
+  color: white;
+  background-color: #42b983;
+}
+.btnDelete {
+  color: #ff4141;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ff4141;
+  background-color: transparent;
+}
+.btnDelete:hover{
+  color: white;
+  background-color: #ff4141;
 }
 </style>

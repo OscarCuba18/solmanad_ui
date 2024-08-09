@@ -1,6 +1,6 @@
 <template>
+  <h2>Comentarios</h2>
   <div>
-    <h2>Comentarios</h2>
     <ul>
       <li v-for="comment in comments" :key="comment.id">
         <div v-if="editingCommentId === comment.id">
@@ -17,7 +17,7 @@
     </ul>
     <form @submit.prevent="addComment">
       <input v-model="newComment" placeholder="Añadir un comentario" required />
-      <button type="submit">Añadir Comentario</button>
+      <button type="submit" class="btnAdd">Añadir Comentario</button>
     </form>
   </div>
 </template>
@@ -99,3 +99,42 @@ export default {
   }
 };
 </script>
+<style scoped>
+form {
+  padding: 1rem;
+  border-radius: 1rem;
+}
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  margin-inline: 1rem;
+  color: #2c3e50;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #2c3e50;
+  background-color: transparent;
+}
+button:hover{
+  color: white;
+  background-color: #2c3e50;
+}
+.btnAdd:hover {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #42b983;
+  color: white;
+  background-color: #42b983;
+}
+input {
+  width: 15rem;
+  border-radius: 0.5rem;
+  border-color: #d0d7deb3;
+  padding: 5px;
+}
+label {
+  width: 10rem;
+  text-align: right;
+  margin-right: 1rem;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Solicitudes - Mantenimiento</h1>
-    <router-link to="/create">Crear solicitud</router-link>
+    <router-link to="/create" class="btnCreate">Crear solicitud</router-link>
     <table>
       <thead>
         <tr>
@@ -9,7 +9,7 @@
           <th>Usuario</th>
           <th>Descripción</th>
           <th>Estado</th>
-          <th>Acciones</th>
+          <th style="width: 18rem;">Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -19,9 +19,9 @@
             <td>{{ request.description }}</td>
             <td>{{ request.state }}</td>
             <td>
+              <router-link :to="`/detail/${request.id}`" style="margin-right: 3rem;">Ver detalles</router-link>
               <router-link :to="`/edit/${request.id}`">Editar</router-link>
-              <button @click="deleteRequest(request.id)">Eliminar</button>
-              <router-link :to="`/detail/${request.id}`">Ver detalles</router-link>
+              <button @click="deleteRequest(request.id)" class="btnDelete">Eliminar</button>
             </td>
           </tr>
         </tbody>
@@ -104,18 +104,36 @@ a, button {
   text-decoration: none;
   color: #007bff; /* Color azul para enlaces */
 }
-
 button {
-  background-color: #ff4d4d; /* Rojo para botones */
   border: none;
-  color: white;
-  padding: 8px 12px;
+  padding: 4px 6px;
   cursor: pointer;
   border-radius: 0.5rem;
+  margin-inline: 1rem;
 }
-
-button:hover {
-  background-color: #e60000; /* Rojo oscuro para hover */
+.btnCreate {
+  padding: 4px 6px;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  color: #42b983;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #42b983;
+  background-color: transparent;
 }
-
+.btnCreate:hover{
+  color: white;
+  background-color: #42b983;
+}
+.btnDelete {
+  color: #ff4141;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ff4141;
+  background-color: transparent;
+}
+.btnDelete:hover{
+  color: white;
+  background-color: #ff4141;
+}
 </style>
