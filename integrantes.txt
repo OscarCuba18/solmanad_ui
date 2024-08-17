@@ -1,0 +1,6 @@
+Nombre del integrante:
+    - Oscar Armando Cuba Cespedes
+Pasos para iniciar el proyecto
+    1) npm install
+    2) npm run serve
+    3) npm run json-server
