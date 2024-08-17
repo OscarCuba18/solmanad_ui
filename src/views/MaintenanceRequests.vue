@@ -1,11 +1,21 @@
 <template>
+  <!-- Buscador -->
+  <label for="searchDescription">Buscar</label>
+    <input type="text" v-model="searchQuery" id="searchDescription" placeholder="Buscar Descripción" />
+
+    <!-- Filtro de Ordenación -->
+    <label for="sortOrder">Ordenar por Fecha Requerida:</label>
+    <select v-model="sortOrder" id="sortOrder">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
   <div>
     <h1>Solicitudes - Mantenimiento</h1>
     <router-link to="/create" class="btnCreate">Crear solicitud</router-link>
     <table>
       <thead>
         <tr>
-          <th>Fecha Requerida</th>
+          <th @click="sortByDate">Fecha Requerida</th>
           <th>Usuario</th>
           <th>Descripción</th>
           <th>Estado</th>
@@ -13,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-          <tr v-for="request in requests" :key="request.id">
+          <tr v-for="request in filteredAndSortedRequests" :key="request.id">
             <td>{{ request.date_required }}</td>
             <td>{{ request.user_id }}</td>
             <td>{{ request.description }}</td>
@@ -25,8 +35,8 @@
             </td>
           </tr>
         </tbody>
-    </table>
-  </div>
+      </table>
+    </div>
   </template>
   
   <script>
@@ -35,8 +45,27 @@
   export default {
   data() {
     return {
-      requests: []
+      requests: [],
+      searchQuery: '', // Valor para el buscador
+      sortOrder: 'asc' // Valor para el filtro de ordenación
     };
+  },
+  computed: {
+    filteredAndSortedRequests() {
+      // Filtrar las solicitudes por descripción
+      let filteredRequests = this.requests.filter((request) => {
+        return request.description.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+
+      // Ordenar las solicitudes por fecha requerida
+      if (this.sortOrder === 'asc') {
+        return filteredRequests.sort((a, b) => new Date(a.date_required) - new Date(b.date_required));
+      } else if (this.sortOrder === 'desc') {
+        return filteredRequests.sort((a, b) => new Date(b.date_required) - new Date(a.date_required));
+      }
+
+      return filteredRequests;
+    }
   },
   mounted() {
     this.fetchRequests();
@@ -135,5 +164,14 @@ button {
 .btnDelete:hover{
   color: white;
   background-color: #ff4141;
+}
+#searchDescription, #sortOrder {
+  margin: 10px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+#sortOrder {
+  width: 200px;
 }
 </style>
